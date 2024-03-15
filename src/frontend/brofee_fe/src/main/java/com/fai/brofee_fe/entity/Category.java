@@ -35,4 +35,5 @@ public class Category {
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Service> services;
 
+    //abc
 }

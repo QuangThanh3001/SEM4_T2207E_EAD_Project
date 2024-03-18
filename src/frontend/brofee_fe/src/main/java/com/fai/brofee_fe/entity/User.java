@@ -49,6 +49,9 @@ public class User implements Serializable {
     )
     private Set<Role> roles = new HashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "referrer_id")
+    private User referrer;
 
 
     @Column(name = "created_at", updatable = false)

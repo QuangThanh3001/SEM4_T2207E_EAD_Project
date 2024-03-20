@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+	<!--begin::Head-->
+	<head>
+		<title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel by Keenthemes</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
+		<meta property="og:url" content="https://keenthemes.com/metronic" />
+		<meta property="og:site_name" content="Keenthemes | Metronic" />
+		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+		<link rel="shortcut icon" th:href="@{/media/logos/favicon.ico}" />
+		<!--begin::Fonts-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<!--end::Fonts-->
+		<!--begin::Page Vendor Stylesheets(used by this page)-->
+		<link th:href="@{/plugins/custom/datatables/datatables.bundle.css}" rel="stylesheet" type="text/css" />
+		<!--end::Page Vendor Stylesheets-->
+		<!--begin::Global Stylesheets Bundle(used by all pages)-->
+		<link th:href="@{/plugins/global/plugins.bundle.css}" rel="stylesheet" type="text/css" />
+		<link th:href="@{/css/style.bundle.css}" rel="stylesheet" type="text/css" />
+		<!--end::Global Stylesheets Bundle-->
+
+		<meta th:name="_csrf" th:content="${_csrf.token}"/>
+		<meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+	</head>
+	<!--end::Head-->
+	<!--begin::Body-->
+	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
+		<!--begin::Main-->
+		<!--begin::Root-->
+		<div class="d-flex flex-column flex-root">
+			<!--begin::Page-->
+			<div class="page d-flex flex-row flex-column-fluid">
+				<!--begin::Aside-->
+				<div th:replace="fragments/aside :: aside"></div>
+				<!--end::Aside-->
+				<!--begin::Wrapper-->
+				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+					<!--begin::Header-->
+					<div th:replace="fragments/header :: header(title = 'Commission Policy')"></div>
+					<!--end::Header-->
+					<!--begin::Content-->
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Toolbar-->
+
+						<!--end::Toolbar-->
+						<!--begin::Post-->
+						<div class="post d-flex flex-column-fluid" id="kt_post">
+							<!--begin::Container-->
+							<div id="kt_content_container" class="container-xxl">
+								<!--begin::Form-->
+								<form class="form d-flex flex-column flex-lg-row" th:action="@{/policy/create}" method="post" th:object="${policy}">
+									<!--begin::Aside column-->
+									<div class="w-100 flex-lg-row-auto w-lg-450px mb-7 me-7 me-lg-10">
+										<!--begin::Order details-->
+										<div class="card card-flush py-4 mb-5 mb-xl-8">
+											<!--begin::Card header-->
+											<div class="card-header">
+												<div class="card-title">
+													<h2>Policy Details</h2>
+												</div>
+											</div>
+											<!--end::Card header-->
+											<!--begin::Card body-->
+											<div class="card-body pt-0">
+												<div class="d-flex flex-column gap-10">
+													<!--begin::Input group-->
+													<div class="fv-row">
+														<!--begin::Label-->
+														<label class="required form-label">Applied Period</label>
+														<!--end::Label-->
+														<!--begin::Editor-->
+														<input class="form-control mb-2" placeholder="Pick date rage" id="kt_daterangepicker_policy"/>
+														<input type="datetime-local" name="startDate" th:field="*{startDate}" hidden>
+														<input type="datetime-local" name="endDate" th:field="*{endDate}" step="1" hidden>
+														<div class="form-text text-danger" th:each="error: ${#fields.errors('startDate')}" th:text="${error}">Validation error</div>
+														<div class="form-text text-danger" th:each="error: ${#fields.errors('endDate')}" th:text="${error}">Validation error</div>
+														<!--end::Editor-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Input group-->
+													<div class="fv-row">
+														<!--begin::Label-->
+														<label class="required form-label">Number of levels</label>
+														<!--end::Label-->
+														<!--begin::Select2-->
+														<select class="form-select mb-2" id="select-levels" th:field="*{maxReferralLevels}">
+															<option value="1">1 upper level</option>
+															<option value="2">2 upper levels</option>
+															<option value="3">3 upper levels</option>
+															<option value="4">4 upper levels</option>
+															<option value="5" selected>5 upper levels</option>
+															<option value="6">6 upper levels</option>
+															<option value="7">7 upper levels</option>
+															<option value="8">8 upper levels</option>
+															<option value="9">9 upper levels</option>
+															<option value="10">10 upper levels</option>
+														</select>
+														<!--end::Select2-->
+														<!--begin::Description-->
+														<div class="text-muted fs-7">Number of referrer levels that will be paid commission.</div>
+														<!--end::Description-->
+														<div class="form-text text-danger" th:each="error: ${#fields.errors('maxReferralLevels')}" th:text="${error}">Validation error</div>
+													</div>
+													<!--end::Input group-->
+												</div>
+											</div>
+											<!--end::Card header-->
+
+										</div>
+										<!--end::Order details-->
+										<div class="card mb-5 mb-xl-8">
+											<!--begin::Header-->
+											<div class="card-header border-0 pt-5">
+												<h3 class="card-title align-items-start flex-column">
+													<span class="card-label fw-bolder fs-3 mb-1">Commission Rate</span>
+													<span class="text-muted mt-1 fw-bold fs-7">Commission fee will be calculated base on service's price</span>
+												</h3>
+											</div>
+											<!--end::Header-->
+											<!--begin::Body-->
+											<div class="card-body py-3">
+												<!--begin::Table container-->
+												<div class="table-responsive">
+													<!--begin::Table-->
+													<table class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+														<!--begin::Table head-->
+														<thead>
+														<tr class="fw-bolder text-muted">
+															<th class="min-w-150px">Level</th>
+															<th class="min-w-100px text-end">Commission Rate</th>
+														</tr>
+														</thead>
+														<!--end::Table head-->
+														<!--begin::Table body-->
+														<tbody>
+														<tr th:each="i: ${#numbers.sequence(0, 9)}" class="level-row">
+															<td>
+																<a class="text-dark fw-bolder text-hover-primary fs-6">Level <span th:text="${i+1}"></span></a>
+															</td>
+															<td class="d-flex justify-content-end">
+																<div class="input-group w-75">
+																	<input type="hidden"  th:field="*{commissionTiers[__${i}__].level}"/>
+																	<input type="number" class="form-control level-rate" value="0" min="0" max="100" th:field="*{commissionTiers[__${i}__].commissionRate}"/>
+																	<span class="input-group-text">%</span>
+																</div>
+															</td>
+														</tr>
+														</tbody>
+														<tfoot>
+														<tr class="border-top">
+															<td class="fw-bolder text-gray-800 fs-5">Total</td>
+															<td class="fw-bolder fs-4 text-end text-success" id="total-rate">0.00%</td>
+														</tr>
+														</tfoot>
+														<!--end::Table body-->
+													</table>
+													<!--end::Table-->
+												</div>
+												<!--end::Table container-->
+											</div>
+											<!--begin::Body-->
+										</div>
+									</div>
+									<!--end::Aside column-->
+									<!--begin::Main column-->
+									<div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
+										<!--begin::Order details-->
+										<div class="card card-flush py-4">
+											<!--begin::Card header-->
+											<div class="card-header">
+												<div class="card-title">
+													<h2>Select Services</h2>
+												</div>
+											</div>
+											<!--end::Card header-->
+											<!--begin::Card body-->
+											<div class="card-body pt-0">
+												<div class="d-flex flex-column gap-10">
+													<!--begin::Separator-->
+													<div class="separator"></div>
+													<!--end::Separator-->
+													<div class="d-flex justify-content-between align-items-center">
+														<div class="text-gray-800 fw-normal fs-4">
+															<span>0</span> service(s) selected
+														</div>
+														<div class="d-flex align-items-center position-relative">
+															<!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+															<span class="svg-icon svg-icon-1 position-absolute ms-4">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+																<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+															</svg>
+														</span>
+															<!--end::Svg Icon-->
+															<input type="text" class="form-control form-control-solid w-100 ps-14" placeholder="Search Products" />
+														</div>
+													</div>
+
+													<!--begin::Table-->
+													<table class="table align-middle table-row-dashed fs-6 gy-5">
+														<!--begin::Table head-->
+														<thead>
+														<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+															<th class="w-25px pe-2"></th>
+															<th class="min-w-200px">Service</th>
+															<th class="min-w-100px">Category</th>
+															<th class="min-w-100px">Price</th>
+															<th class="min-w-100px text-end pe-5">Status</th>
+														</tr>
+														</thead>
+														<!--end::Table head-->
+														<!--begin::Table body-->
+														<tbody class="fw-bold text-gray-600">
+														<!--begin::Table row-->
+														<tr th:each="service : ${services}">
+															<td>
+																<div class="form-check form-check-sm form-check-custom form-check-solid">
+																	<input class="form-check-input" type="checkbox" th:field="*{serviceIds}" th:value="${service.id}"/>
+																</div>
+															</td>
+															<td>
+																<div class="d-flex align-items-center">
+																	<a class="text-gray-800 text-hover-primary fs-5 fw-bolder" th:text="${service.name}">Service 1</a>
+																</div>
+															</td>
+															<td>
+																<div class="d-flex align-items-center">
+																	<span class="fs-5 fw-bolder" th:text="${service.category.name}">Category 1</span>
+																</div>
+															</td>
+															<td>
+																<div class="d-flex align-items-center">
+																	<span class="fs-5 fw-bolder" th:text="${#numbers.formatCurrency(service.basePrice)}">390000d</span>
+																</div>
+															</td>
+															<td class="text-end pe-5" data-order="0">
+																<span class="badge badge-light-success">Applicable</span>
+																<span class="badge badge-light-danger">Conflict</span>
+															</td>
+														</tr>
+														<!--end::Table row-->
+
+														</tbody>
+														<!--end::Table body-->
+													</table>
+													<!--end::Table-->
+												</div>
+											</div>
+											<!--end::Card header-->
+										</div>
+										<!--end::Order details-->
+
+										<div class="d-flex justify-content-end">
+											<!--begin::Button-->
+											<a th:href="@{/policy}" class="btn btn-light me-5">Cancel</a>
+											<!--end::Button-->
+											<!--begin::Button-->
+											<button type="submit" id="kt_ecommerce_edit_order_submit" class="btn btn-primary">
+												<span class="indicator-label">Save Changes</span>
+												<span class="indicator-progress">Please wait...
+												<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+											</button>
+											<!--end::Button-->
+										</div>
+									</div>
+									<!--end::Main column-->
+								</form>
+								<!--end::Form-->
+							</div>
+							<!--end::Container-->
+						</div>
+						<!--end::Post-->
+					</div>
+					<!--end::Content-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Page-->
+		</div>
+		<!--end::Root-->
+
+		<!--end::Main-->
+
+		<!--begin::Scrolltop-->
+		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+			<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+			<span class="svg-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+					<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="currentColor" />
+					<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="currentColor" />
+				</svg>
+			</span>
+			<!--end::Svg Icon-->
+		</div>
+		<!--end::Scrolltop-->
+		<!--begin::Modals-->
+
+
+
+
+
+		<!--end::Modals-->
+		<!--begin::Javascript-->
+		<script>var hostUrl = "/";</script>
+		<!--begin::Global Javascript Bundle(used by all pages)-->
+		<script th:src="@{/plugins/global/plugins.bundle.js}"></script>
+		<script th:src="@{/js/scripts.bundle.js}"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Page Vendors Javascript(used by this page)-->
+		<script th:src="@{/plugins/custom/datatables/datatables.bundle.js}"></script>
+		<!--end::Page Vendors Javascript-->
+		<!--begin::Page Custom Javascript(used by this page)-->
+		<script th:src="@{/js/custom/apps/ecommerce/sales/save-order.js}"></script>
+		<script th:src="@{/js/widgets.bundle.js}"></script>
+		<script th:src="@{/js/custom/widgets.js}"></script>
+		<script th:src="@{/js/custom/apps/chat/chat.js}"></script>
+		<script th:src="@{/js/custom/utilities/modals/upgrade-plan.js}"></script>
+		<script th:src="@{/js/custom/utilities/modals/create-app.js}"></script>
+		<script th:src="@{/js/custom/utilities/modals/users-search.js}"></script>
+
+		<script>
+			$("#kt_daterangepicker_1").daterangepicker();
+			$(function() {
+				$('#kt_daterangepicker_policy').daterangepicker({
+					timePicker: true,
+					startDate: moment().startOf('month'),
+					endDate: moment().endOf('month'),
+					locale: {
+						format: 'MM/DD/YYYY',
+					},
+				});
+				$('#kt_daterangepicker_policy').on('apply.daterangepicker', function(ev, picker) {
+					var startTime = picker.startDate.format('YYYY-MM-DD HH:mm:ss'); // Adjust format as needed
+					var endTime = picker.endDate.format('YYYY-MM-DD HH:mm:ss'); // Adjust format as needed
+					$('input[name="startDate"]').val(startTime);
+					$('input[name="endDate"]').val(endTime);
+				});
+
+				var initialStartTime = moment().startOf('month').format('YYYY-MM-DD HH:mm:ss');
+				var initialEndTime = moment().endOf('month').format('YYYY-MM-DD HH:mm:ss');
+				$('input[name="startDate"]').val(initialStartTime);
+				$('input[name="endDate"]').val(initialEndTime);
+			});
+		</script>
+		<script th:inline="javascript">
+			/* Update table rows and total rate on select change */
+			$("#select-levels").change(function() {
+				var selectedLevels = $(this).val();
+
+				$(".level-row").each(function(index) {
+					if (index < selectedLevels) {
+						$(this).show();
+					} else {
+						$(this).hide();
+						// Reset input value to 0 for hidden rows
+						$(this).find(".level-rate").val(0);
+					}
+				});
+
+				calculateTotalRate();
+			});
+
+			/* Calculate total rate on input change or select change */
+			$(".level-rate").change(function() {
+				calculateTotalRate();
+			});
+
+			/* Function to calculate and display total rate */
+			function calculateTotalRate() {
+				var totalRate = 0;
+				$(".level-rate").each(function() {
+					totalRate += parseFloat($(this).val() || 0);
+				});
+				$("#total-rate").text(totalRate.toFixed(2) + "%");
+			}
+
+			// Trigger initial calculation and hide unnecessary rows on page load
+			$(document).ready(function() {
+				calculateTotalRate();
+				$("#select-levels").trigger("change"); // Simulate change event
+			});
+		</script>
+
+		<!--end::Page Custom Javascript-->
+		<!--end::Javascript-->
+	</body>
+	<!--end::Body-->
+</html>

@@ -1,16 +1,18 @@
 package com.fai.brofee_fe.dto;
 
 import com.fai.brofee_fe.entity.Category;
+import com.fai.brofee_fe.entity.ServicePolicyAssignment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
-public class ServiceDTO_hung {
+public class ServiceDetailDTO_hung {
 
     private Long id;
 
@@ -24,9 +26,14 @@ public class ServiceDTO_hung {
 
     private BigDecimal discount;
 
+    private CategoryDTO_hung category;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 
+    private LocalDateTime deletedAt;
+
+    private List<PolicyServiceAssignmentDTO> policyAssignments;
 
 }

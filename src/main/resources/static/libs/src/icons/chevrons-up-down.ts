@@ -1,0 +1,13 @@
+import defaultAttributes from '../defaultAttributes';
+import type { IconNode } from '../types';
+
+const ChevronsUpDown: IconNode = [
+  'svg',
+  defaultAttributes,
+  [
+    ['path', { d: 'm7 15 5 5 5-5' }],
+    ['path', { d: 'm7 9 5-5 5 5' }],
+  ],
+];
+
+export default ChevronsUpDown;
